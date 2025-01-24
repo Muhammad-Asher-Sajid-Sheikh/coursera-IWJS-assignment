@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Photo Gallery</title>
+    <style>
+        #image {
+            width: 500px;
+            height: 500px;
+            background-color: #ddd;
+            text-align: center;
+            line-height: 500px;
+            font-size: 20px;
+        }
+
+        .image-gallery img {
+            width: 150px;
+            height: 150px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body onload="pageLoad()">
+
+    <h1>Interactive Photo Gallery</h1>
+
+    <div id="image" tabindex="0">Hover over or focus on an image below to display here.</div>
+
+    <div class="image-gallery">
+        <img src="image1.jpg" alt="A beautiful sunset over the mountains" id="image1" class="preview-img" 
+            onmouseover="upDate(this)" onmouseleave="undo()" onfocus="upDate(this)" onblur="undo()" tabindex="0">
+        <img src="image2.jpg" alt="A serene beach view with clear blue water" id="image2" class="preview-img" 
+            onmouseover="upDate(this)" onmouseleave="undo()" onfocus="upDate(this)" onblur="undo()" tabindex="0">
+        <img src="image3.jpg" alt="A vibrant cityscape at night" id="image3" class="preview-img" 
+            onmouseover="upDate(this)" onmouseleave="undo()" onfocus="upDate(this)" onblur="undo()" tabindex="0">
+        <img src="image4.jpg" alt="A lush green forest with sunlight streaming through" id="image4" class="preview-img" 
+            onmouseover="upDate(this)" onmouseleave="undo()" onfocus="upDate(this)" onblur="undo()" tabindex="0">
+        <img src="image5.jpg" alt="A majestic waterfall surrounded by rocks" id="image5" class="preview-img" 
+            onmouseover="upDate(this)" onmouseleave="undo()" onfocus="upDate(this)" onblur="undo()" tabindex="0">
+        <img src="image6.jpg" alt="A snowy mountain range under a clear blue sky" id="image6" class="preview-img" 
+            onmouseover="upDate(this)" onmouseleave="undo()" onfocus="upDate(this)" onblur="undo()" tabindex="0">
+    </div>
+
+    <button onclick="undo()">Undo</button>
+
+    <script>
+        // Function to update the image preview
+        function upDate(previewPic) {
+            console.log("Triggered upDate with image:", previewPic.src);
+            document.getElementById('image').innerHTML = previewPic.alt;
+            document.getElementById('image').style.backgroundImage = `url(${previewPic.src})`;
+        }
+
+        // Function to undo the image preview
+        function undo() {
+            console.log("Triggered undo function");
+            document.getElementById('image').style.backgroundImage = "url('')";
+            document.getElementById('image').innerHTML = "Hover over or focus on an image below to display here.";
+        }
+
+        // Function called on page load
+        function pageLoad() {
+            console.log("Page has loaded successfully!");
+            const images = document.querySelectorAll('.preview-img');
+            images.forEach((image, index) => {
+                console.log(`Setting tabindex and listeners for Image ${index + 1}`);
+                image.setAttribute('tabindex', '0');
+            });
+        }
+    </script>
+</body>
+</html>
